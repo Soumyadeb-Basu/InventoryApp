@@ -1,6 +1,7 @@
 package com.webapp.InventoryProject.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,20 @@ public class OrderService {
 	{
 		return o_repo.save(order);
 		
+	}
+	
+	public Order getOrder(int id)
+	{
+		Optional<Order> order=o_repo.findById(id);
+		if(order.isPresent())
+			return order.get();
+		else
+			return new Order();
+
+	}
+	
+	public void remove(int id)
+	{
+		o_repo.deleteById(id);
 	}
 }
